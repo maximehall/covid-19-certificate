@@ -25,6 +25,16 @@ function getProfile() {
   return fields
 }
 
+// function generateQR (text) {
+//   const opts = {
+//     errorCorrectionLevel: 'M',
+//     type: 'image/png',
+//     quality: 0.92,
+//     margin: 1,
+//   }
+//   return QRCode.toDataURL(text, opts)
+// }
+
 async function generatePdf(profile, reason) {
   const url = 'certificate.pdf?v=bfc885e5326a9e0d3184aed9d183bca20a9cd76f'
   const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
@@ -37,50 +47,57 @@ async function generatePdf(profile, reason) {
     page.drawText(text, {x, y, size, font})
   }
 
-  drawText(profile.name, 125, 685)
-  drawText(profile.birthday, 125, 661)
-  drawText(profile.birthplace || '', 95, 637)
-  drawText(`${profile.address} ${profile.zipcode} ${profile.town}`, 140, 613)
+  drawText(profile.name, 125, 696)
+  drawText(profile.birthday, 125, 674)
+  drawText(profile.birthplace || '', 300, 674)
+  drawText(`${profile.address} ${profile.zipcode} ${profile.town}`, 140, 652)
 
   switch (reason) {
     case 'work':
-      drawText('x', 76.5, 526, 20)
+      drawText('x', 76.5, 578, 20)
       break
     case 'groceries':
-      drawText('x', 76.5, 476.5, 20)
+      drawText('x', 76.5, 533, 20)
       break
     case 'health':
-      drawText('x', 76.5, 436, 20)
+      drawText('x', 76.5, 477, 20)
       break
-    case 'family':
-      drawText('x', 76.5, 399.5, 20)
+    case 'family': // ok
+      drawText('x', 76.5, 435, 20)
+      break
+    case 'handicap': // ok
+      drawText('x', 76.5, 396, 20)
       break
     case 'sport':
-      drawText('x', 76.5, 344, 20)
+      drawText('x', 76.5, 358, 20)
       break
-    case 'notification':
-      drawText('x', 76.5, 297, 20)
+    case 'convocation':
+      drawText('x', 76.5, 295, 20)
       break
-    case 'mission':
-      drawText('x', 76.5, 261, 20)
+    case 'missions':
+      drawText('x', 76.5, 255, 20)
+      break
+    case 'enfants':
+      drawText('x', 76.5, 211, 20)
       break
   }
 
-  drawText(profile['done-at'] || profile.town, 110, 225)
+  drawText(profile['done-at'] || profile.town, 105, 175)
 
   if (reason !== '') {
     const date = [
-      String((new Date).getDate()).padStart(2, '0'),
-      String((new Date).getMonth() + 1).padStart(2, '0'),
-      String((new Date).getFullYear()),
+      String((new Date(Date.now() - 10000 * 60)).getDate()).padStart(2, '0'),
+      String((new Date(Date.now() - 10000 * 60)).getMonth() + 1).padStart(2, '0'),
+      String((new Date(Date.now() - 10000 * 60)).getFullYear()),
     ].join('/')
 
-    drawText(date, 105, 201)
-    drawText(String((new Date).getHours()).padStart(2, '0'), 195, 201)
-
+    drawText(date, 91, 153)
+    // drawText(String((new Date).getHours()).padStart(2, '0'), 264, 153)
+    const hours = String(new Date(Date.now() - 10000 * 60).getHours()).padStart(2, '0')
+  
     // Round the minutes to the lower X0 or X5 value, so it feels more human.
-    const minutes = Math.floor((new Date).getMinutes() / 5) * 5;
-    drawText(String(minutes).padStart(2, '0'), 225, 201)
+    const minutes = String(Math.floor((new Date(Date.now() - 10000 * 60)).getMinutes() / 5) * 5).padStart(2, '0');
+    drawText(String(hours+'h'+minutes).padStart(2, '0'), 257, 153)
   }
 
   const signatureArrayBuffer = await fetch(profile.signature).then(res => res.arrayBuffer())
@@ -89,10 +106,30 @@ async function generatePdf(profile, reason) {
 
   page.drawImage(signatureImage, {
     x: page.getWidth() - signatureDimensions.width - 380,
-    y: 130,
+    y: 90,
     width: signatureDimensions.width,
     height: signatureDimensions.height,
   })
+
+//   const generatedQR = await generateQR(data)
+
+//   const qrImage = await pdfDoc.embedPng(generatedQR)
+
+//   page1.drawImage(qrImage, {
+//     x: page1.getWidth() - 156,
+//     y: 100,
+//     width: 92,
+//     height: 92,
+//   })
+
+//   pdfDoc.addPage()
+//   const page2 = pdfDoc.getPages()[1]
+//   page2.drawImage(qrImage, {
+//     x: 50,
+//     y: page2.getHeight() - 350,
+//     width: 300,
+//     height: 300,
+//   })
 
   const pdfBytes = await pdfDoc.save()
   return new Blob([pdfBytes], {type: 'application/pdf'})

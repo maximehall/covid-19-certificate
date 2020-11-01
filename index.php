@@ -109,51 +109,29 @@
 <body>
     <h4>COVID-19 – Générateur d'attestation de déplacement</h4>
 
-    <div class="alert alert-success" role="alert" id="alert-official">
+    <div class="alert alert-primary" role="alert" id="alert-official">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
 
         <p><small>
-            <a href="https://media.interieur.gouv.fr/deplacement-covid-19/">
-                🇫🇷 Le gouvernement a publié son propre générateur !
-            </a>
-            Il a été développé à partir de mon code (🥳), la confidentialité de vos données reste donc identique, et
-            il vous permettra de présenter votre attestation sur smartphone.
+            Ce générateur est là pour faciliter la création de vos attestations de déplacement. 
+            <br>Les données sont stockées <u>exclusivement</u> sur votre téléphone.
         </small></p>
-
-        <small>
-            Mon outil restera en place mais je ne continuerai pas à le maintenir, je l'avais créé afin de faciliter le
-            remplissage des attestations, maintenant il ne me semble plus nécessaire.
-            <br>Merci pour votre soutien à tous.&nbsp;🙏
-        </small>
     </div>
 
     <form id="form-profile" style="display: none">
-        <div class="alert alert-primary" role="alert">
-            <small>
-                <p>
-                    Ce générateur est là pour faciliter l'usage des attestations. Les données sont stockées
-                    <u>exclusivement</u> sur votre téléphone et le code peut être consulté
-                    <a href="https://github.com/nesk/covid-19-certificate">sur Github</a>.
-                </p>
-                <a href="https://www.interieur.gouv.fr/Actualites/L-actu-du-Ministere/Attestation-de-deplacement-derogatoire-et-justificatif-de-deplacement-professionnel">
-                    Plus d'informations sur le site officiel du gouvernement.
-                </a>
-            </small>
-        </div>
-
         <h5>Remplissez votre profil</h5>
 
         <div class="form-group">
             <label for="field-name">Nom et prénom</label>
-            <input type="text" class="form-control" id="field-name" name="name" autofocus>
+            <input type="text" class="form-control" id="field-name" name="name" value="HALLARY Maxime" autofocus>
         </div>
 
         <div class="form-group">
             <label for="field-birthday">Date de naissance</label>
             <div class="input-group">
-                <input type="text" class="form-control" id="field-birthday" name="birthday">
+                <input type="text" class="form-control" id="field-birthday" name="birthday" value="12/03/1993">
                 <div class="input-group-append" id="date-selector-group">
                     <input type="date" id="date-selector">
                     <span class="input-group-text text-primary">
@@ -165,22 +143,22 @@
 
         <div class="form-group">
             <label for="field-birthplace">Lieu de naissance</label>
-            <input type="text" class="form-control" id="field-birthplace" name="birthplace">
+            <input type="text" class="form-control" id="field-birthplace" name="birthplace" value="Saint-Etienne">
         </div>
 
         <div class="form-group">
             <label for="field-address">Adresse</label>
-            <input type="text" class="form-control" id="field-address" name="address">
+            <input type="text" class="form-control" id="field-address" name="address" value="6 rue de l'Abbé Pierre Moussempès">
         </div>
 
         <div class="form-group">
             <label for="field-town">Ville</label>
-            <input type="text" class="form-control" id="field-town" name="town">
+            <input type="text" class="form-control" id="field-town" name="town" value="Biarritz">
         </div>
 
         <div class="form-group">
             <label for="field-zipcode">Code Postal</label>
-            <input type="text" class="form-control" id="field-zipcode" name="zipcode">
+            <input type="text" class="form-control" id="field-zipcode" name="zipcode" value="64200">
         </div>
 
         <div class="form-check">
@@ -205,13 +183,6 @@
     </form>
 
     <form id="form-generate" style="display: none">
-        <div class="alert alert-warning" role="alert">
-            <small>
-                Si vous n'avez pas besoin de sortir, <u>restez chez vous</u> ! Ce générateur est là pour faciliter les
-                sorties <u>justifiées</u>. Veillez à prendre soin de vous et des autres en limitant la
-                propagation du virus. 🦠 😷
-            </small>
-        </div>
 
         <h5>Choisissez un motif de sortie</h5>
 
@@ -234,6 +205,11 @@
             <input class="form-check-input" type="radio" name="field-reason" id="radio-family" value="family">
             <label class="form-check-label" for="radio-family">Famille</label>
         </div>
+   
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="field-reason" id="radio-handicap" value="handicap">
+            <label class="form-check-label" for="radio-handicap">Handicap</label>
+        </div>
 
         <div class="form-check">
             <input class="form-check-input" type="radio" name="field-reason" id="radio-sport" value="sport">
@@ -241,13 +217,18 @@
         </div>
 
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="field-reason" id="radio-notification" value="notification">
-            <label class="form-check-label" for="radio-notification">Convocation Judiciaire</label>
+            <input class="form-check-input" type="radio" name="field-reason" id="radio-convocation" value="convocation">
+            <label class="form-check-label" for="radio-convocation">Convocation Judiciaire</label>
         </div>
 
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="field-reason" id="radio-mission" value="mission">
-            <label class="form-check-label" for="radio-mission">Mission d'intérêt général</label>
+            <input class="form-check-input" type="radio" name="field-reason" id="radio-missions" value="missions">
+            <label class="form-check-label" for="radio-missions">Missions</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="field-reason" id="radio-enfants" value="enfants">
+            <label class="form-check-label" for="radio-enfants">Enfants</label>
         </div>
 
         <hr>
@@ -268,21 +249,6 @@
             Effacer mon profil
         </button>
     </form>
-
-    <footer class="footer text-center">
-        <small>
-            <a href="https://github.com/nesk/covid-19-certificate">Github</a>
-            -
-            <a href="https://nesk.dev">nesk.dev</a>
-            -
-            <a href="https://twitter.com/johannpardanaud">@johannpardanaud</a>
-        </small>
-    </footer>
-
-    <div class="alert alert-danger" role="alert" style="display: none" id="alert-facebook">
-        ATTENTION !! Vous utilisez actuellement le navigateur Facebook, ce générateur ne fonctionne pas correctement au
-        sein de ce navigateur ! Merci d'ouvrir Chrome sur Android ou bien Safari sur iOS.
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.4.1/dist/pdf-lib.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
