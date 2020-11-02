@@ -7,3 +7,9 @@ The code was written by using these awesome open source projects:
 - [Bootstrap](https://getbootstrap.com/)
 - [Font Awesome](https://fontawesome.com/license)
 - [Twemoji](https://twemoji.twitter.com/)
+
+
+  - TODO:
+    - [ ] Add disclamer Facebook browser
+    - [ ] Add QR code
+    - [ ] Add custom time selector with preview
