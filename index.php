@@ -125,13 +125,13 @@
 
         <div class="form-group">
             <label for="field-name">Nom et prénom</label>
-            <input type="text" class="form-control" id="field-name" name="name" value="HALLARY Maxime" autofocus>
+            <input type="text" class="form-control" id="field-name" name="name" autofocus>
         </div>
 
         <div class="form-group">
             <label for="field-birthday">Date de naissance</label>
             <div class="input-group">
-                <input type="text" class="form-control" id="field-birthday" name="birthday" value="12/03/1993">
+                <input type="text" class="form-control" id="field-birthday" name="birthday" >
                 <div class="input-group-append" id="date-selector-group">
                     <input type="date" id="date-selector">
                     <span class="input-group-text text-primary">
@@ -143,22 +143,22 @@
 
         <div class="form-group">
             <label for="field-birthplace">Lieu de naissance</label>
-            <input type="text" class="form-control" id="field-birthplace" name="birthplace" value="Saint-Etienne">
+            <input type="text" class="form-control" id="field-birthplace" name="birthplace">
         </div>
 
         <div class="form-group">
             <label for="field-address">Adresse</label>
-            <input type="text" class="form-control" id="field-address" name="address" value="6 rue de l'Abbé Pierre Moussempès">
+            <input type="text" class="form-control" id="field-address" name="address">
         </div>
 
         <div class="form-group">
             <label for="field-town">Ville</label>
-            <input type="text" class="form-control" id="field-town" name="town" value="Biarritz">
+            <input type="text" class="form-control" id="field-town" name="town">
         </div>
 
         <div class="form-group">
             <label for="field-zipcode">Code Postal</label>
-            <input type="text" class="form-control" id="field-zipcode" name="zipcode" value="64200">
+            <input type="text" class="form-control" id="field-zipcode" name="zipcode">
         </div>
 
         <div class="form-check">
@@ -187,7 +187,7 @@
         <h5>Choisissez un motif de sortie</h5>
 
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="field-reason" id="radio-work" value="work" checked>
+            <input class="form-check-input" type="radio" name="field-reason" id="radio-work" value="work">
             <label class="form-check-label" for="radio-work">Travail</label>
         </div>
 
@@ -212,7 +212,7 @@
         </div>
 
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="field-reason" id="radio-sport" value="sport">
+            <input class="form-check-input" type="radio" name="field-reason" id="radio-sport" value="sport" checked>
             <label class="form-check-label" for="radio-sport">Sport &amp; animaux</label>
         </div>
 
